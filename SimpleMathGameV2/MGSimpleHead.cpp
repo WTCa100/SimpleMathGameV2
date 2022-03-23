@@ -9,64 +9,74 @@
 // In order: Addition, substraction, multipltion, devidition
 
 
-void Problem::CreateProblem(uint16_t lDifficult, uint16_t lAct)
+void Problem::CreateProblem()
 {
-	switch (lAct)
+	switch (lAction)
 	{
 	case 1:
 	{
-		nFirstI = rand() % (int)pow(10, lDifficult + 1) + 1;
-		nSecondI = rand() % (int)pow(10, lDifficult + 1) + 1;
+		nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
+		nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
 		break;
 	}
 	case 2:
 	{
 		do
 		{
-			nFirstI = rand() % (int)pow(10, lDifficult + 1) + 1;
-		} while (nSecondI > nFirstI);
+			nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
+			nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
+		} while (nSecondI > nFirstI && (nSecondI - nSecondI <= 0));
 		break;
 	}
 	case 3:
 	{
-
+		nFirstI = rand() % (int)pow(10, lDif) + 1;
+		nSecondI = rand() % (int)pow(10, lDif) + 1;
 		break;
 	}
 	case 4:
 	{
-
+		nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
+		do
+		{
+			nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
+		} while (nFirstI % nSecondI != 0 && nSecondI != nFirstI && nSecondI != 1);
 		break;
 	}
 	}
 	
 }
 
-void Problem::Display()
+char Problem::cCheckActionSymbol()
 {
-	char cAct = ' ';
 	switch (lAction)
 	{
 	case 1:
 	{
-		cAct = '+';
+		return '+';
 		break;
 	}
 	case 2:
 	{
-		cAct = '-';
+		return '-';
 		break;
 	}
 	case 3:
 	{
-		cAct = '*';
+		return '*';
 		break;
 	}
 	case 4:
 	{
-		cAct = '/';
+		return '/';
 		break;
 	}
 	}
-	printf_s("%d %c %d = ", nFirstI, cAct, nSecondI);
+}
+
+void Problem::Display()
+{
+	CreateProblem();
+	printf_s("%d %c %d = ", nFirstI, cCheckActionSymbol(), nSecondI);
 }
 
