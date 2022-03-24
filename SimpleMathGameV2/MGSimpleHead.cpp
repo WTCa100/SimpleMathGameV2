@@ -36,7 +36,11 @@ void Problem::CreateProblem()
 	}
 	case 4:
 	{
-
+		nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
+		do
+		{
+			nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
+		} while (nFirstI% nSecondI != 0 && (nSecondI != 1 && nSecondI != nFirstI));
 		break;
 	}
 	}
