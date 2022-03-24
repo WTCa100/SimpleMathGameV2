@@ -8,7 +8,7 @@ class Problem
 {
 public:
 	uint16_t lDif = 1;
-	uint16_t lAction = rand()% 4 + 1;
+	uint16_t lAction = 1;
 private:
 	int nFirstI, nSecondI;
 	void CreateProblem();

@@ -25,7 +25,7 @@ void Problem::CreateProblem()
 		{
 			nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
 			nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
-		} while (nSecondI > nFirstI);
+		} while (nSecondI >= nFirstI);
 		break;
 	}
 	case 3:
@@ -36,11 +36,15 @@ void Problem::CreateProblem()
 	}
 	case 4:
 	{
-		nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
 		do
 		{
+			nFirstI = rand() % (int)pow(10, lDif + 1) + 1; // TODO: Check if is Prime - if yes reroll the number
 			nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
-		} while (nFirstI% nSecondI != 0 && (nSecondI != 1 && nSecondI != nFirstI));
+			if (nFirstI % nSecondI != 0)
+			{
+				nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
+			}
+		} while (nSecondI == 1 || nSecondI == nFirstI || nFirstI % nSecondI != 0);
 		break;
 	}
 	}
