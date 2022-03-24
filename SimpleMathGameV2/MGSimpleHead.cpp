@@ -44,7 +44,7 @@ void Problem::CreateProblem()
 			{
 				nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
 			}
-		} while (nSecondI == 1 || nSecondI == nFirstI || nFirstI % nSecondI != 0);
+		} while (nSecondI == nFirstI || nSecondI == 1 || nSecondI == nFirstI || nFirstI % nSecondI != 0);
 		break;
 	}
 	}
