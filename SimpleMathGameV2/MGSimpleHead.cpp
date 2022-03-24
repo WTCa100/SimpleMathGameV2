@@ -30,7 +30,8 @@ void Problem::CreateProblem()
 	}
 	case 3:
 	{
-
+		nFirstI = rand() % (int)pow(10, lDif) + 1;
+		nSecondI = rand() % (int)pow(10, lDif) + 1;
 		break;
 	}
 	case 4:
