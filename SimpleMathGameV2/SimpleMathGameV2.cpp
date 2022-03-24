@@ -17,6 +17,7 @@ void problemDisplay(Problem Instance);
 
 int main()
 {
+	system("title Simple Math Game V2 - by Jan \"WTCa100\" Bielawa");
 	std::vector<Problem> Pset;
 	srand(time(NULL));
 	Problem initialize;

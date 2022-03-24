@@ -15,7 +15,7 @@ void Problem::CreateProblem()
 	{
 	case 1:
 	{
-		nFirstI = rand() % (int)pow(10, lDif + 1) + 1;
+		nFirstI = rand() % (int)pow(10, lDif + 1) + 1; // May change from '1' to (int)pow(10, lDif - 1); 
 		nSecondI = rand() % (int)pow(10, lDif + 1) + 1;
 		break;
 	}
