@@ -48,7 +48,7 @@ void Problem::CreateProblem()
 		break;
 	}
 	}
-	
+	nExpA = nExpectedAswer();
 }
 
 char Problem::cCheckActionSymbol()
@@ -80,7 +80,25 @@ char Problem::cCheckActionSymbol()
 
 void Problem::Display()
 {
-	CreateProblem();
 	printf_s("%d %c %d = ", nFirstI, cCheckActionSymbol(), nSecondI);
 }
 
+int Problem::nExpectedAswer()
+{
+	switch (lAction)
+	{
+	case 1:
+		return nFirstI + nSecondI;
+		break;
+	case 2:
+		return nFirstI - nSecondI;
+		break;
+	case 3:
+		return nFirstI * nSecondI;
+		break;
+	case 4:
+		return nFirstI / nSecondI;
+		break;
+	}
+	return 0;
+}

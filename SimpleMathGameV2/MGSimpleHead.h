@@ -9,10 +9,12 @@ class Problem
 public:
 	uint16_t lDif = 1;
 	uint16_t lAction = 1;
+	int nExpA = 0;
 private:
 	int nFirstI, nSecondI;
-	void CreateProblem();
 	char cCheckActionSymbol();
+	int nExpectedAswer();
 public:
+	void CreateProblem();
 	void Display();
 };
