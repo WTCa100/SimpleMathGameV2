@@ -8,6 +8,7 @@
 // uint16_t lMaxDif = 5 
 // You can change the difficulty settings in code so you can have i.e. From 1 to 100.
 
+std::vector<Problem> Pset; // This will be used for storing purposes
 std::string Nickname = "Dummy"; // This is for final ranking section of the game
 uint32_t score = 0;
 uint16_t lMainDifficult = 1;
@@ -16,21 +17,24 @@ void chooseDif();
 void problemDisplay(Problem Instance);
 bool isUserAnswerCorrect(std::string UI);
 void checkAndCollect(Problem Instance, int UserIn);
-void finalScoreSum(std::string UserName);
+void finalScoreSum(std::string UserName); // The std::string arg is going to be handy once the highscore and ranking wil be applied
+void nextAction();
+void showProblems();
 
 int main()
 {
 	system("title Simple Math Game V2 - by Jan \"WTCa100\" Bielawa");
-	std::vector<Problem> Pset;
 	srand(time(NULL));
 	Problem initialize;
 	do
 	{
 		score = 0;
+		Pset.clear();
 		chooseDif();
 		initialize.lDif = lMainDifficult;
 		problemDisplay(initialize);
 		finalScoreSum(Nickname);
+		nextAction();
 	} while (bIsGameOn);
 }
 
@@ -70,6 +74,7 @@ void chooseDif()
 }
 void problemDisplay(Problem Instance)
 {
+
 	for (int i = 0; i < 5 * lMainDifficult; i++)
 	{
 		std::string ActualA = "";
@@ -90,6 +95,8 @@ void problemDisplay(Problem Instance)
 			else
 			{
 				nActualA = std::stoi(ActualA);
+				Instance.nUserA = nActualA;
+				Pset.push_back(Instance);
 			}
 		} while (!isUserAnswerCorrect(ActualA));
 		checkAndCollect(Instance, nActualA);
@@ -129,4 +136,82 @@ void finalScoreSum(std::string UserName)
 	printf("You have earned %d points!", score);
 	_getch();
 	system("cls");
+}
+
+void nextAction()
+{
+	std::string tmp = "3";
+	int nNextMove = 3;
+	printf("What would you like to do next?\n");
+	printf("1. New Game.\n");
+	printf("2. Show problems and answers\n");
+	printf("3. Exit the game\n");
+//	printf("3. Show ranking"); This is going to be added later on 
+	std::getline(std::cin, tmp);
+	do
+	{
+		if (!isUserAnswerCorrect(tmp))
+		{
+			printf("Entar a valid answer!\n");
+			_getch();
+			system("cls");
+		}
+		else
+		{
+			nNextMove = std::stoi(tmp);
+			if (nNextMove < 1 || nNextMove > 3)
+			{
+				printf("Enter a valid answer!\n");
+				_getch();
+				system("cls");
+			}
+			else
+			{
+				system("cls");
+			}
+		}
+	} while (!isUserAnswerCorrect(tmp) && (nNextMove < 1 || nNextMove > 3));
+	switch (nNextMove)
+	{
+	case 1:
+		break;
+	case 2:
+		showProblems();
+		break;
+	case 3:
+		bIsGameOn = false;
+		break;
+	}
+}
+
+void showProblems()
+{
+	for (int i = 0; i < Pset.size(); i++)
+	{
+		printf("%d Problems: ", i + 1);
+		Pset[i].Display();
+		printf("\n");
+		printf("Expected answer was %d\t Your was %d\n", Pset[i].nExpA, Pset[i].nUserA);
+		if (Pset[i].nExpA == Pset[i].nUserA)
+		{
+			printf("It was correct!\n");
+		}
+		else
+		{
+			printf("It was incorrect!\n");
+		}
+		printf("\n");
+		if (i % 20 == 0 && i > 0)
+		{
+			printf("End of the page\n");
+			printf("Press any key to continue to diplay the next page\n");
+			_getch();
+			system("cls");
+		}
+	}
+	printf("End of the list.\n");
+	printf("Press any key to continue.\n");
+	_getch();
+	system("cls");
+	nextAction();
 }

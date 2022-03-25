@@ -10,6 +10,7 @@ public:
 	uint16_t lDif = 1;
 	uint16_t lAction = 1;
 	int nExpA = 0;
+	int nUserA = 0;
 private:
 	int nFirstI, nSecondI;
 	char cCheckActionSymbol();
