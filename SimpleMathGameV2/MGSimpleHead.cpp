@@ -83,7 +83,7 @@ void Problem::Display()
 	printf_s("%d %c %d = ", nFirstI, cCheckActionSymbol(), nSecondI);
 }
 
-int Problem::nExpectedAswer()
+long long Problem::nExpectedAswer()
 {
 	switch (lAction)
 	{

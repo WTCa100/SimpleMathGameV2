@@ -9,12 +9,13 @@ class Problem
 public:
 	uint16_t lDif = 1;
 	uint16_t lAction = 1;
-	int nExpA = 0;
-	int nUserA = 0;
+	long long nExpA = 0;
+	long long nUserA = 0;
 private:
-	int nFirstI, nSecondI;
+	long long nFirstI, nSecondI; // Long is required so if the difficult level will be changed to a greater number
+								//  The program won't crash as easliy
 	char cCheckActionSymbol();
-	int nExpectedAswer();
+	long long nExpectedAswer();
 public:
 	void CreateProblem();
 	void Display();

@@ -61,8 +61,9 @@ void chooseDif()
 		printf("2. Moderate\n");
 		printf("3. Advanced\n");
 		printf("4. Hard\n");
+		printf("5. Very Hard\n");
 		std::getline(std::cin, tmp);
-		if (tmp[0] < '1' || tmp[0] > '4' || tmp[0] == '\0') // TODO - Better check if answer is valid
+		if (tmp[0] < '1' || tmp[0] > '5' || tmp[0] == '\0') // TODO - Better check if answer is valid
 		{
 			printf("Enter a valid answer!");
 			_getch();
@@ -82,16 +83,17 @@ void chooseDif()
 			}
 			system("cls");
 		}
-	} while (tmp[0] < '1' || tmp[0] > '4' || tmp[0] == '\0' || std::stoi(tmp) > 5); // You can replace std::stoi(tmp) > 5 with std::stoi(tmp) > lMaxDif
+	} while (tmp[0] < '1' || tmp[0] > '5' || tmp[0] == '\0' || std::stoi(tmp) > 5); // You can replace std::stoi(tmp) > 5 with std::stoi(tmp) > lMaxDif
 
 }
 void problemDisplay(Problem Instance)
 {
 
-	for (int i = 0; i < 5 * lMainDifficult; i++)
-	{
+	for (int i = 0; i < 5 * lMainDifficult; i++) // The second logical statement is due to be changed
+	{											// If you put i.e. 100 Difficult level (which I do not recommend) the game will have 500 questions
+												// I think that it should be capped at 5, 10, 15, 50 and 100 not more
 		std::string ActualA = "";
-		int nActualA = 0;
+		long long nActualA = 0;
 		Instance.lAction = rand() % 4 + 1;
 		Instance.CreateProblem();
 		do
@@ -117,7 +119,7 @@ void problemDisplay(Problem Instance)
 	}
 }
 
-bool isUserAnswerCorrect(std::string UI)
+bool isUserAnswerCorrect(std::string UI) // UI stands for User Input
 {
 	if (UI[0] == '\0')
 		return false;
