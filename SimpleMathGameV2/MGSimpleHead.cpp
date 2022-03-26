@@ -88,13 +88,13 @@ long long Problem::nExpectedAswer()
 	switch (lAction)
 	{
 	case 1:
-		return nFirstI + nSecondI;
+		return (static_cast<long>(nFirstI) + static_cast<long long>(nSecondI));
 		break;
 	case 2:
-		return nFirstI - nSecondI;
+		return (static_cast<long long>(nFirstI) - static_cast<long long>(nSecondI));
 		break;
 	case 3:
-		return nFirstI * nSecondI;
+		return (static_cast<long long>(nFirstI) * static_cast<long long>(nSecondI));
 		break;
 	case 4:
 		return nFirstI / nSecondI;
