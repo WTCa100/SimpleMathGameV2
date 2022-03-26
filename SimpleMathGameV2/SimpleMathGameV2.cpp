@@ -25,6 +25,19 @@ int main()
 {
 	system("title Simple Math Game V2 - by Jan \"WTCa100\" Bielawa");
 	srand(time(NULL));
+	printf("Hello and welcome to the second version of my first project!\n");
+	printf("This time to play with classes, objects and methods so you can enjoy much greater challanges.\n");
+	printf("Press any key to continue\n");
+	_getch();
+	system("cls");
+	printf("The idea of the game is simple.\n");
+	printf("1st You choose your difficult level.\n");
+	printf("2nd The program will automatically generate random mathemtaical problems for you to solve\n");
+	printf("3rd You have only one chance to solve it - if you are correct you get points if you are not you don\'t\n");
+	printf("And that is all you need to know!\n");
+	printf("Press any key to continue\n");
+	_getch();
+	system("cls");
 	Problem initialize;
 	do
 	{
