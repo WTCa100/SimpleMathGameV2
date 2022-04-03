@@ -80,7 +80,8 @@ char Problem::cCheckActionSymbol()
 
 void Problem::Display()
 {
-	printf_s("%d %c %d = ", nFirstI, cCheckActionSymbol(), nSecondI);
+	std::cout << nFirstI << " " << cCheckActionSymbol() << " " << nSecondI;
+//	printf_s("%d %c %d", nFirstI, cCheckActionSymbol(), nSecondI); <- Don't know why but this doesn't work
 }
 
 long long Problem::nExpectedAswer()
