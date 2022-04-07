@@ -206,7 +206,7 @@ void showProblems()
 		printf("%d Problems: ", i + 1);
 		Pset[i].Display();
 		printf("\n");
-		std::cout << "Expected answer was " << Pset[i].nExpA << " Your's was " << Pset[i].nUserA << std::endl;
+		printf("Expected answer was %lld . Your's was %lld\n", Pset[i].nExpA, Pset[i].nUserA);
 		if (Pset[i].nExpA == Pset[i].nUserA)
 		{
 			printf("It was correct!\n");
