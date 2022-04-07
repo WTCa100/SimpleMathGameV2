@@ -12,6 +12,7 @@ std::vector<Problem> Pset; // This will be used for storing purposes
 std::string Nickname = "Dummy"; // This is for final ranking section of the game
 uint32_t score = 0;
 uint16_t lMainDifficult = 1;
+int gameRepeat = 5;
 bool bIsGameOn = true;
 void chooseDif();
 void problemDisplay(Problem Instance);
@@ -19,6 +20,7 @@ bool isUserAnswerCorrect(std::string UI);
 void checkAndCollect(Problem Instance, int UserIn);
 void finalScoreSum(std::string UserName); // The std::string arg is going to be handy once the highscore and ranking wil be applied
 void nextAction();
+void howManyGames();
 void showProblems();
 
 int main()
@@ -44,13 +46,48 @@ int main()
 		score = 0;
 		Pset.clear();
 		chooseDif();
+		howManyGames();
 		initialize.lDif = lMainDifficult;
 		problemDisplay(initialize);
 		finalScoreSum(Nickname);
 		nextAction();
 	} while (bIsGameOn);
 }
+void howManyGames() // TODO Finish
+{
+	std::string tmp = "1";
+	bool isNumericAnswerValid = true;
+	do
+	{
+	printf("How many problems would you like to solve?\n");
+	printf("NOTICE: Max number of games is 1000\n");
+	std::getline(std::cin, tmp);
+	if (!isUserAnswerCorrect(tmp))
+	{
+		printf("Invalid answer! The input only accepts numeric values\n");
+		_getch();
+		system("cls");
+	}
+	else if(isUserAnswerCorrect(tmp))
+	{
+		gameRepeat = std::stoi(tmp);
+		if (gameRepeat <= 0 || gameRepeat > 1000)
+		{
+			isNumericAnswerValid = false;
+			printf("Your input is out of range!\n");
+			_getch();
+			system("cls");
+		}
+		else
+		{
+			isNumericAnswerValid = true;
+			system("cls");
+		}
+	}
+	} while (!isUserAnswerCorrect(tmp) || !isNumericAnswerValid);
 
+
+}
 void chooseDif()
 {
 	std::string tmp = "0"; // Initiate a string 
@@ -89,7 +126,7 @@ void chooseDif()
 void problemDisplay(Problem Instance)
 {
 
-	for (int i = 0; i < 5 * lMainDifficult; i++) // The second logical statement is due to be changed
+	for (int i = 0; i < gameRepeat; i++) // The second logical statement is due to be changed
 	{											// If you put i.e. 100 Difficult level (which I do not recommend) the game will have 500 questions
 												// I think that it should be capped at 5, 10, 15, 50 and 100 not more
 		std::string ActualA = "";
@@ -161,7 +198,7 @@ void nextAction()
 	printf("1. New Game.\n");
 	printf("2. Show problems and answers\n");
 	printf("3. Exit the game\n");
-//	printf("3. Show ranking"); This is going to be added later on 
+//	printf("N. Show ranking"); This is going to be added later on 
 	std::getline(std::cin, tmp);
 	do
 	{
