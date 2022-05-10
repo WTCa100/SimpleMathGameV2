@@ -17,7 +17,7 @@ bool bIsGameOn = true;
 void chooseDif();
 void problemDisplay(Problem Instance);
 bool isUserAnswerCorrect(std::string UI);
-void checkAndCollect(Problem Instance, int UserIn);
+void checkAndCollect(Problem Instance, int64_t UserIn);
 void finalScoreSum(std::string UserName); // The std::string arg is going to be handy once the highscore and ranking wil be applied
 void nextAction();
 void howManyGames();
@@ -26,11 +26,11 @@ void showProblems();
 int main()
 {
 	system("title Simple Math Game V2 - by Jan \"WTCa100\" Bielawa");
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	printf("Hello and welcome to the second version of my first project!\n");
 	printf("This time to play with classes, objects and methods so you can enjoy much greater challanges.\n");
 	printf("Press any key to continue\n");
-	_getch();
+	(void)_getch();
 	system("cls");
 	printf("The idea of the game is simple.\n");
 	printf("1st You choose your difficult level.\n");
@@ -38,7 +38,7 @@ int main()
 	printf("3rd You have only one chance to solve it - if you are correct you get points if you are not you don\'t\n");
 	printf("And that is all you need to know!\n");
 	printf("Press any key to continue\n");
-	_getch();
+	(void)_getch();
 	system("cls");
 	Problem initialize;
 	do
@@ -65,7 +65,7 @@ void howManyGames() // TODO Finish
 	if (!isUserAnswerCorrect(tmp))
 	{
 		printf("Invalid answer! The input only accepts numeric values\n");
-		_getch();
+		(void)_getch();
 		system("cls");
 	}
 	else if(isUserAnswerCorrect(tmp))
@@ -75,7 +75,7 @@ void howManyGames() // TODO Finish
 		{
 			isNumericAnswerValid = false;
 			printf("Your input is out of range!\n");
-			_getch();
+			(void)_getch();
 			system("cls");
 		}
 		else
@@ -100,48 +100,39 @@ void chooseDif()
 		printf("4. Hard\n");
 		printf("5. Very Hard\n");
 		std::getline(std::cin, tmp);
-		if (tmp[0] < '1' || tmp[0] > '5' || tmp[0] == '\0') // TODO - Better check if answer is valid
+		if (!isUserAnswerCorrect(tmp) || std::stoi(tmp) < 1 || std::stoi(tmp) > 5) // TODO - Better check if answer is valid
 		{
 			printf("Enter a valid answer!");
-			_getch();
+			(void)_getch();
 			system("cls");
 		}
 		else
 		{
-			if (std::stoi(tmp) > 5)
-			{
-				printf("Enter a valid answer!");
-				_getch();
-				system("cls");
-			}
-			else
-			{
-				lMainDifficult = std::stoi(tmp);
-			}
+
+			lMainDifficult = std::stoi(tmp);
 			system("cls");
 		}
-	} while (tmp[0] < '1' || tmp[0] > '5' || tmp[0] == '\0' || std::stoi(tmp) > 5); // You can replace std::stoi(tmp) > 5 with std::stoi(tmp) > lMaxDif
+	} while (std::stoi(tmp) < 1 || std::stoi(tmp) > 5 || !isUserAnswerCorrect(tmp)); // You can replace std::stoi(tmp) > 5 with std::stoi(tmp) > lMaxDif
 
 }
 void problemDisplay(Problem Instance)
 {
 
-	for (int i = 0; i < gameRepeat; i++) // The second logical statement is due to be changed
-	{											// If you put i.e. 100 Difficult level (which I do not recommend) the game will have 500 questions
-												// I think that it should be capped at 5, 10, 15, 50 and 100 not more
+	for (int i = 0; i < gameRepeat; i++) 
+	{																			
 		std::string ActualA = "";
-		long long nActualA = 0;
-		Instance.lAction = rand() % 4 + 1;
+		int64_t nActualA = 0;
+		Instance.lAction = rand() % 3 + 1;
 		Instance.CreateProblem();
 		do
 		{
 			printf("%d Problem\t Score: %d\n", i + 1, score);
 			Instance.Display();
 			std::getline(std::cin, ActualA);
-			if (isUserAnswerCorrect(ActualA) == false)
+			if (!isUserAnswerCorrect(ActualA))
 			{
 				printf("Input a valid answer!");
-				_getch();
+				(void)_getch();
 				system("cls");
 			}
 			else
@@ -160,7 +151,7 @@ bool isUserAnswerCorrect(std::string UI) // UI stands for User Input
 {
 	if (UI[0] == '\0')
 		return false;
-	for (int i = 0; i < UI.size(); i++)
+	for (auto i = 0u; i < UI.size(); i++)
 	{
 		if (UI[i] < '0' || UI[i] > '9')
 			return false;
@@ -168,25 +159,25 @@ bool isUserAnswerCorrect(std::string UI) // UI stands for User Input
 	return true;
 }
 
-void checkAndCollect(Problem Instance, int UserIn)
+void checkAndCollect(Problem Instance, int64_t UserIn)
 {
 	if (Instance.nExpA == UserIn)
 	{
 		score += 10 * lMainDifficult;
 		printf("Correct! \t +%d points!", 10 * lMainDifficult);
-		_getch();
+		(void)_getch();
 	}
 	else
 	{
 		printf("Incorrect! \t No points!");
-		_getch();
+		(void)_getch();
 	}
 }
 
 void finalScoreSum(std::string UserName)
 {
 	printf("You have earned %d points!", score);
-	_getch();
+	(void)_getch();
 	system("cls");
 }
 
@@ -205,7 +196,7 @@ void nextAction()
 		if (!isUserAnswerCorrect(tmp))
 		{
 			printf("Entar a valid answer!\n");
-			_getch();
+			(void)_getch();
 			system("cls");
 		}
 		else
@@ -214,7 +205,7 @@ void nextAction()
 			if (nNextMove < 1 || nNextMove > 3)
 			{
 				printf("Enter a valid answer!\n");
-				_getch();
+				(void)_getch();
 				system("cls");
 			}
 			else
@@ -238,7 +229,7 @@ void nextAction()
 
 void showProblems()
 {
-	for (int i = 0; i < Pset.size(); i++)
+	for (auto i = 0u; i < Pset.size(); i++)
 	{
 		printf("%d Problems: ", i + 1);
 		Pset[i].Display();
@@ -257,13 +248,13 @@ void showProblems()
 		{
 			printf("End of the page\n");
 			printf("Press any key to continue to diplay the next page\n");
-			_getch();
+			(void)_getch();
 			system("cls");
 		}
 	}
 	printf("End of the list.\n");
 	printf("Press any key to continue.\n");
-	_getch();
+	(void)_getch();
 	system("cls");
 	nextAction();
 }
